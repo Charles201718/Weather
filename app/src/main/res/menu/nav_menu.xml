@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
+        <group
+            android:checkableBehavior="single">
+        <item
+            android:id="@+id/Imap"
+            android:checkable="true"
+            android:enabled="true"
+            android:icon="@drawable/ic_menu_course_search"
+            android:title="@string/map"
+            android:visible="true"
+            app:itemTextColor="@color/colorPrimaryDark"
+            app:showAsAction="withText" />
+        <item
+            android:id="@+id/CTable"
+            android:checkable="true"
+            android:enabled="true"
+            android:icon="@drawable/ic_menu_empty_classroom"
+            android:title="@string/table"
+            android:visible="true"
+            app:itemTextColor="@color/colorPrimaryDark"
+            app:showAsAction="withText" />
+
+        <item
+            android:id="@+id/City_select"
+            android:checkable="true"
+            android:enabled="true"
+            android:icon="@drawable/ic_menu_course_add"
+            android:title="@string/select"
+            android:visible="true"
+            app:itemTextColor="@color/colorPrimaryDark"
+            app:showAsAction="withText" />
+        </group>
+</menu>

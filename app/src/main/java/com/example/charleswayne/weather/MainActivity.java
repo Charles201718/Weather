@@ -1,16 +1,35 @@
 package com.example.charleswayne.weather;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.baidu.mapapi.SDKInitializer;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -24,13 +43,24 @@ import java.net.URL;
 import java.security.PrivateKey;
 
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    private SystemBarTintManager tintManager;
+    private NavigationView navigationView;
+    private View content;
     private String updateCityCode = "-1";
+    private String[] str;
+    private android.support.v4.app.Fragment fragment1, fragment2, fragment3;
     TodayWeather todayWeather = null;
     //tile
+    private android.support.v4.app.FragmentManager fragmentManager;
     private ImageView UpdateBtn;
     private ImageView SelectCityBtn;
     private ImageView LocateBtn;
+    private ImageView Kcb;
+    private ImageView ViewMp;
+    private MenuItem searchcity;
+
+    private DrawerLayout drawerLayout;
 
     //todayweather
     private TextView cityT,timeT,humidityT,weekT,pmDataT,pmQualityT,temperatureT,
@@ -56,24 +86,27 @@ public class MainActivity extends Activity implements View.OnClickListener{
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         Log.d("MainActivity","onCreate");
-        setContentView(R.layout.activity_main);
+        SDKInitializer.initialize(getApplicationContext());
 
+        setContentView(R.layout.activity_main);
+        //initWindow();
+        content=findViewById(R.id.content);
 
 
         UpdateBtn = (ImageView)findViewById(R.id.title_city_update);;
         UpdateBtn.setOnClickListener(this);
 
-        SelectCityBtn = (ImageView)findViewById(R.id.title_city_manager);
-        SelectCityBtn.setOnClickListener(this);
+
 
         LocateBtn = (ImageView)findViewById(R.id.title_city_locate);
         LocateBtn.setOnClickListener(this);
 
         initView();
-
+        setupDrawerLayout();
         updateCityCode = getIntent().getStringExtra("citycode");
         if(updateCityCode!="-1"&& updateCityCode != null)
         {
@@ -103,6 +136,42 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
     }
 
+
+    private void setupDrawerLayout() {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override public boolean onNavigationItemSelected(MenuItem menuItem) {
+                if(menuItem.getItemId()==R.id.Imap){
+                    imapp();
+                }
+                if(menuItem.getItemId()==R.id.City_select){
+                    iselect();
+                }
+                if(menuItem.getItemId()==R.id.CTable){
+                    ikcb();
+                }
+
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });
+    }
+    private void iselect(){
+        Intent intent = new Intent(this,SelectCity.class);
+        startActivity(intent);
+    }
+    private void imapp(){
+        Intent intent=new Intent(this,imap_activity.class);
+        startActivity(intent);
+    }
+    private void ikcb(){
+        Intent intent = new Intent(this,kcb_activity.class);
+        startActivity(intent);
+    }
+
+
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.title_city_update)
@@ -117,17 +186,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 getWeatherDatafromNet("101180101");
             }
         }
-        if(v.getId()==R.id.title_city_manager)
-        {
-            Intent intent = new Intent(this,SelectCity.class);
-            startActivity(intent);
-        }
 
         if(v.getId()== R.id.title_city_locate){
             Log.d("click","title_city_locate");
             Intent intent = new Intent(this,Locate.class);
             startActivity(intent);
         }
+
     }
 
     //获取网页信息 response
@@ -521,4 +586,16 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
         Toast.makeText(MainActivity.this,"更新成功",Toast.LENGTH_SHORT).show();
     }
+
+    private void initWindow() {//初始化窗口属性，让状态栏和导航栏透明
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            tintManager = new SystemBarTintManager(this);
+            int statusColor = Color.parseColor("#1976d2");
+            tintManager.setStatusBarTintColor(statusColor);
+            tintManager.setStatusBarTintEnabled(true);
+        }
+    }
+
 }

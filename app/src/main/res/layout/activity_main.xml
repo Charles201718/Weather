@@ -1,25 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/title_relative"
         android:layout_width="match_parent"
         android:layout_height="45.0dp"
         android:background="#000000">
-        <ImageView
-            android:id="@+id/title_city_manager"
-            android:layout_height="45.0dp"
-            android:layout_width="45.0dp"
-            android:src="@drawable/title_city_manager">
-        </ImageView>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar1"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+
+
+            android:gravity="center_vertical"
+
+            android:text="天气预报"
+            android:textSize="25.0sp"
+            android:textColor="#FFFFFF"
+
+            android:background="#7f3a3df7"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/AlertDialog.AppCompat.Light"/>
+
         <TextView
             android:id="@+id/title_city_name"
             android:layout_height="45.0dp"
             android:layout_width="match_parent"
 
-            android:layout_toRightOf="@id/title_city_manager"
+
             android:gravity="center_vertical"
 
             android:text="天气预报"
@@ -354,5 +378,17 @@
                 </TextView>
             </LinearLayout>
         </RelativeLayout>
+
     </RelativeLayout>
 </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+<android.support.design.widget.NavigationView
+android:id="@+id/nav_view"
+android:layout_height="match_parent"
+android:layout_width="match_parent"
+android:layout_gravity="start"
+app:menu="@menu/nav_menu"
+app:headerLayout="@layout/nav_header" />
+
+</android.support.v4.widget.DrawerLayout>
