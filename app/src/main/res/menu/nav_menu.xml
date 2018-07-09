@@ -32,5 +32,14 @@
             android:visible="true"
             app:itemTextColor="@color/colorPrimaryDark"
             app:showAsAction="withText" />
+                <item
+                    android:id="@+id/iTv"
+                    android:checkable="true"
+                    android:enabled="true"
+                    android:icon="@drawable/ic_menu_course_add"
+                    android:title="@string/iTV"
+                    android:visible="true"
+                    app:itemTextColor="@color/colorPrimaryDark"
+                    app:showAsAction="withText" />
         </group>
 </menu>

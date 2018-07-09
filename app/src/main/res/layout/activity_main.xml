@@ -16,73 +16,81 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/title_relative"
-        android:layout_width="match_parent"
-        android:layout_height="45.0dp"
-        android:background="#000000">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar1"
+        <RelativeLayout
+            android:id="@+id/title_relative"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-
-
-            android:gravity="center_vertical"
-
-            android:text="天气预报"
-            android:textSize="25.0sp"
-            android:textColor="#FFFFFF"
-
-            android:background="#7f3a3df7"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/AlertDialog.AppCompat.Light"/>
-
-        <TextView
-            android:id="@+id/title_city_name"
             android:layout_height="45.0dp"
-            android:layout_width="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="#000000">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar1"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
 
 
-            android:gravity="center_vertical"
+                android:background="#7f3a3df7"
 
-            android:text="天气预报"
-            android:textSize="25.0sp"
-            android:textColor="#FFFFFF">
-        </TextView>
+                android:gravity="center_vertical"
+                android:text="天气预报"
+                android:textColor="#FFFFFF"
 
-        <ImageView
-            android:id="@+id/title_city_locate"
-            android:layout_width="45.0dp"
-            android:layout_height="45.0dp"
+                android:textSize="25.0sp"
+                app:popupTheme="@style/AlertDialog.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+            <ImageView
+                android:id="@+id/menu_btn"
+                android:layout_width="45.0dp"
+                android:layout_height="45.0dp"
+                android:src="@drawable/ic_menu"
+                ></ImageView>
 
-            android:layout_toLeftOf="@+id/title_city_update"
-
-            android:src="@android:drawable/ic_menu_mylocation"
-            app:srcCompat="@android:drawable/ic_menu_mylocation"></ImageView>
-
-        <ImageView
-            android:id="@+id/title_city_update"
-            android:layout_width="45.0dp"
-            android:layout_height="45.0dp"
-
-            android:layout_toLeftOf="@+id/title_city_share"
-
-            android:src="@android:drawable/stat_notify_sync_noanim"
-            app:srcCompat="@android:drawable/stat_notify_sync_noanim"></ImageView>
-
-        <ImageView
-            android:id="@+id/title_city_share"
-            android:layout_width="45.0dp"
-            android:layout_height="45.0dp"
-
-            android:layout_alignParentRight="true"
-
-            android:src="@android:drawable/ic_menu_share"
-            app:srcCompat="@android:drawable/ic_menu_share"></ImageView>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/title_city_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
 
+
+                android:gravity="center"
+                android:text="天气预报"
+                android:textColor="#FFFFFF"
+                android:textSize="25.0sp">
+
+            </TextView>
+
+            <ImageView
+                android:id="@+id/title_city_locate"
+                android:layout_width="45.0dp"
+                android:layout_height="45.0dp"
+
+                android:layout_toLeftOf="@+id/title_city_update"
+
+                android:src="@android:drawable/ic_menu_mylocation"
+                app:srcCompat="@android:drawable/ic_menu_mylocation"></ImageView>
+
+            <ImageView
+                android:id="@+id/title_city_update"
+                android:layout_width="45.0dp"
+                android:layout_height="45.0dp"
+
+                android:layout_toLeftOf="@+id/title_city_share"
+
+                android:src="@android:drawable/stat_notify_sync_noanim"
+                app:srcCompat="@android:drawable/stat_notify_sync_noanim"></ImageView>
+
+            <ImageView
+                android:id="@+id/title_city_share"
+                android:layout_width="45.0dp"
+                android:layout_height="45.0dp"
+
+                android:layout_alignParentRight="true"
+
+                android:src="@android:drawable/ic_menu_share"
+                app:srcCompat="@android:drawable/ic_menu_share"></ImageView>
+        </RelativeLayout>
     <RelativeLayout
         android:id="@+id/today_relative"
         android:layout_height="wrap_content"

@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -44,32 +45,21 @@ import java.security.PrivateKey;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    protected View menuView;
     private SystemBarTintManager tintManager;
     private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
     private View content;
     private String updateCityCode = "-1";
-    private String[] str;
-    private android.support.v4.app.Fragment fragment1, fragment2, fragment3;
     TodayWeather todayWeather = null;
-    //tile
-    private android.support.v4.app.FragmentManager fragmentManager;
     private ImageView UpdateBtn;
-    private ImageView SelectCityBtn;
     private ImageView LocateBtn;
-    private ImageView Kcb;
-    private ImageView ViewMp;
-    private MenuItem searchcity;
-
-    private DrawerLayout drawerLayout;
-
-    //todayweather
+    private ImageView MenuBtn;
     private TextView cityT,timeT,humidityT,weekT,pmDataT,pmQualityT,temperatureT,
             climateT,windT,cityNameT;
     private ImageView PM25Img,weatherImg;
-    //future
     private  TextView week1T,week2T,week3T,temperature1T,temperature2T,temperature3T,
             wind1T,wind2T,wind3T,climate1T,climate2T,climate3T;
-
     private Handler mHandler = new Handler()
     {
         public void handleMessage(android.os.Message message)
@@ -101,9 +91,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         UpdateBtn.setOnClickListener(this);
 
 
-
         LocateBtn = (ImageView)findViewById(R.id.title_city_locate);
         LocateBtn.setOnClickListener(this);
+
+        MenuBtn = (ImageView)findViewById(R.id.menu_btn);
+        MenuBtn.setOnClickListener(this);
 
         initView();
         setupDrawerLayout();
@@ -152,7 +144,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(menuItem.getItemId()==R.id.CTable){
                     ikcb();
                 }
-
+                if(menuItem.getItemId()==R.id.iTv){
+                    iTV();
+                }
                 drawerLayout.closeDrawers();
                 return true;
             }
@@ -170,12 +164,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this,kcb_activity.class);
         startActivity(intent);
     }
-
+    private void iTV(){
+        Intent intent = new Intent(this,rss_activity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.title_city_update)
         {
+            Log.d("click","AHHHHHH");
             SharedPreferences mySharePre = getSharedPreferences("CityCodePreference",Activity.MODE_PRIVATE);
             String sharecode = mySharePre.getString("citycode","");
             if(!sharecode.equals(""))
@@ -191,6 +189,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("click","title_city_locate");
             Intent intent = new Intent(this,Locate.class);
             startActivity(intent);
+        }
+        if(v.getId()==R.id.menu_btn){
+            Log.d("click","OJBK");
+            drawerLayout.openDrawer(GravityCompat.START);
         }
 
     }
@@ -416,6 +418,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     void initView()
     {
+
+
         //title
         cityNameT = (TextView)findViewById(R.id.title_city_name);
 
